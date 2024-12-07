@@ -1,12 +1,19 @@
 name: run_tests
 on: push
 jobs: 
-  build:
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest] # run on all three OS
+    runs-on: ${{ matrix.os }}
     steps: 
-        - uses: actions/checkout@v4
-        - uses: actions/setup-python@v5
-          with:
-                python-version: '3.11.2' 
-        - name: run tests
-          run: python3 -m unittest -v
+      - name: Check out code # download the code from my repositoroy
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.2'
+
+      - name: Run tests
+        run: python -m unittest -v
