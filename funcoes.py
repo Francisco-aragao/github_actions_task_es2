@@ -20,7 +20,7 @@ class Calculator:
         if not isinstance(num1, int) or not isinstance(num2, int):
             raise TypeError("Both numbers must be integers")
         
-        return num1 - num2
+        return num1 * num2
 
     def divide(self, num1, num2):
         
